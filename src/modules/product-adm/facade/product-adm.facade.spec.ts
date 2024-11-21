@@ -22,12 +22,6 @@ describe("ProductAdmFacade test", () => {
   });
 
   it("should add a product", async () => {
-    // const productRepository = new ProductRepository();
-    // const addProductUseCase = new AddProductUseCase(productRepository);
-    // const productFacade = new ProductAdmFacade({
-    //   addUseCase: addProductUseCase,
-    //   stockUseCase: undefined, //new CheckStockUseCase(productRepository),
-    // });
     const productFacade = ProductAdmFacadeFactory.create();
     const input = {
       id: "1",
