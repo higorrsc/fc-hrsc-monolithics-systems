@@ -1,10 +1,13 @@
 import { PlaceOrderInputDto } from "./place-order.dto";
 import PlaceOrderUseCase from "./place-order.usecase";
 
+const mockDate = new Date(2000, 1, 1);
+
 describe("PlaceOrderUseCase unit test", () => {
   describe("validateProduct method", () => {
     //@ts-expect-error - no params in constructor
     const placeOrderUseCase = new PlaceOrderUseCase();
+
     it("should throw an error if no products are selected", async () => {
       const input: PlaceOrderInputDto = {
         clientId: "1",
@@ -14,6 +17,7 @@ describe("PlaceOrderUseCase unit test", () => {
         placeOrderUseCase["validateProducts"](input)
       ).rejects.toThrow(new Error("No products select"));
     });
+
     it("should throw an error when product is out of stock", async () => {
       const mockProductFacade = {
         checkStock: jest.fn(({ productId }: { productId: string }) =>
@@ -53,6 +57,33 @@ describe("PlaceOrderUseCase unit test", () => {
       expect(mockProductFacade.checkStock).toHaveBeenCalledTimes(5);
     });
   });
+
+  describe("getProduct method", () => {
+    beforeAll(() => {
+      jest.useFakeTimers("modern");
+      jest.setSystemTime(mockDate);
+    });
+
+    afterAll(() => {
+      jest.useRealTimers();
+    });
+
+    //@ts-expect-error - no params in constructor
+    const placeOrderUseCase = new PlaceOrderUseCase();
+
+    it("should throw an error when product not found", async () => {
+      const mockCatalogFacade = {
+        find: jest.fn().mockResolvedValue(null),
+      };
+
+      //@ts-expect-error - force set catalogFacade
+      placeOrderUseCase["_catalogFacade"] = mockCatalogFacade;
+      await expect(placeOrderUseCase["getProduct"]("0")).rejects.toThrow(
+        new Error("Product not found")
+      );
+    });
+  });
+
   describe("Execute method", () => {
     it("should throw an error when client not found", async () => {
       const mockClientFacade = {
@@ -71,6 +102,7 @@ describe("PlaceOrderUseCase unit test", () => {
         new Error("Client not found")
       );
     });
+
     it("should throw an error when products are not valid", async () => {
       const mockClientFacade = {
         findClient: jest.fn().mockResolvedValue(true),
