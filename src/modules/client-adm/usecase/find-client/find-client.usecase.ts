@@ -1,8 +1,5 @@
 import ClientGateway from "../../gateway/client.gateway";
-import {
-  FindClientInputDto,
-  FindClientOutputDto,
-} from "./find-client.usecase.dto";
+import { FindClientInputDto, FindClientOutputDto } from "./find-client.dto";
 
 export default class FindClientUseCase {
   private _clientRepository: ClientGateway;

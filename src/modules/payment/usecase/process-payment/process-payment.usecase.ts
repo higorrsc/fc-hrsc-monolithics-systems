@@ -4,7 +4,7 @@ import PaymentGateway from "../../gateway/payment.gateway";
 import {
   ProcessPaymentInputDto,
   ProcessPaymentOutputDto,
-} from "./process-payment.usecase.dto";
+} from "./process-payment.dto";
 
 export default class ProcessPaymentUseCase implements UseCaseInterface {
   constructor(private transactionRepository: PaymentGateway) {}
