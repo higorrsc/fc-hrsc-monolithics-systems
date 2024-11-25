@@ -35,9 +35,15 @@ describe("ClientRepository test", () => {
 
     const input: AddClientFacadeInputDto = {
       id: "1",
-      name: "Client 1",
-      email: "email@email.com",
-      address: "Address 1",
+      name: "Janie Patton",
+      email: "janie.patton@email.com",
+      document: "ABC123",
+      street: "Helena Fuller",
+      number: "54",
+      complement: "AP 123",
+      city: "Belo Horizonte",
+      state: "MG",
+      zipCode: "31659-564",
     };
     await facade.addClient(input);
 
@@ -45,7 +51,13 @@ describe("ClientRepository test", () => {
     expect(clientDb).toBeDefined();
     expect(clientDb.name).toEqual(input.name);
     expect(clientDb.email).toEqual(input.email);
-    expect(clientDb.address).toEqual(input.address);
+    expect(clientDb.document).toEqual(input.document);
+    expect(clientDb.street).toEqual(input.street);
+    expect(clientDb.number).toEqual(input.number);
+    expect(clientDb.complement).toEqual(input.complement);
+    expect(clientDb.city).toEqual(input.city);
+    expect(clientDb.state).toEqual(input.state);
+    expect(clientDb.zipCode).toEqual(input.zipCode);
   });
 
   it("should find a client", async () => {
@@ -60,9 +72,15 @@ describe("ClientRepository test", () => {
 
     const input = {
       id: "1",
-      name: "Client 1",
-      email: "email@email.com",
-      address: "Address 1",
+      name: "Janie Patton",
+      email: "janie.patton@email.com",
+      document: "ABC123",
+      street: "Helena Fuller",
+      number: "54",
+      complement: "AP 123",
+      city: "Belo Horizonte",
+      state: "MG",
+      zipCode: "31659-564",
     };
     await facade.addClient(input);
     const clientDb = await facade.findClient({ id: input.id });
@@ -70,6 +88,12 @@ describe("ClientRepository test", () => {
     expect(clientDb.id).toEqual(input.id);
     expect(clientDb.name).toEqual(input.name);
     expect(clientDb.email).toEqual(input.email);
-    expect(clientDb.address).toEqual(input.address);
+    expect(clientDb.document).toEqual(input.document);
+    expect(clientDb.street).toEqual(input.street);
+    expect(clientDb.number).toEqual(input.number);
+    expect(clientDb.complement).toEqual(input.complement);
+    expect(clientDb.city).toEqual(input.city);
+    expect(clientDb.state).toEqual(input.state);
+    expect(clientDb.zipCode).toEqual(input.zipCode);
   });
 });
