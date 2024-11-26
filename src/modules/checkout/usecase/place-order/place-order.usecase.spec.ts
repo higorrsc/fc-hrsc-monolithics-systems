@@ -258,7 +258,7 @@ describe("PlaceOrderUseCase unit test", () => {
         expect(mockClientFacade.findClient).toHaveBeenCalledTimes(1);
         expect(mockClientFacade.findClient).toHaveBeenCalledWith({ id: "1c" });
         expect(mockValidateProducts).toHaveBeenCalledTimes(1);
-        expect(mockValidateProducts).toHaveBeenCalledWith({ input });
+        expect(mockValidateProducts).toHaveBeenCalledWith(input);
         expect(mockGetProduct).toHaveBeenCalledTimes(2);
         expect(mockCheckoutRepository.addOrder).toHaveBeenCalledTimes(1);
         expect(mockPaymentFacade.process).toHaveBeenCalledTimes(1);
