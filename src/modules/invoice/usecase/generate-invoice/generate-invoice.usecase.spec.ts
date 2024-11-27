@@ -6,7 +6,7 @@ const MockRepository = () => {
     find: jest.fn(),
   };
 };
-describe("should create an invoice", () => {
+describe("Generate Invoice UseCase unit test", () => {
   it("should create an invoice", async () => {
     const repository = MockRepository();
     const usecase = new GenerateInvoiceUseCase(repository);
