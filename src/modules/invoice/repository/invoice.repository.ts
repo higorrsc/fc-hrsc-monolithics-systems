@@ -68,7 +68,7 @@ export default class InvoiceRepository implements InvoiceGateway {
     });
 
     for (const item of input.items) {
-      await InvoiceItemModel.create({
+      InvoiceItemModel.create({
         id: item.id.id,
         invoiceId: input.id.id,
         name: item.name,
