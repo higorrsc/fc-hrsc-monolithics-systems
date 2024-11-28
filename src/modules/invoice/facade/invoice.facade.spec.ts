@@ -1,10 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
+import InvoiceFacadeFactory from "../factory/invoice.facade.factory";
 import { InvoiceItemModel } from "../repository/invoice-item.model";
 import { InvoiceModel } from "../repository/invoice.model";
-import InvoiceRepository from "../repository/invoice.repository";
-import FindInvoiceUseCase from "../usecase/find-invoice/find-invoice.usecase";
-import GenerateInvoiceUseCase from "../usecase/generate-invoice/generate-invoice.usecase";
-import InvoiceFacade from "./invoice.facade";
 import { GenerateInvoiceFacadeInputDto } from "./invoice.facade.dto";
 
 describe("InvoiceFacade test", () => {
@@ -27,12 +24,13 @@ describe("InvoiceFacade test", () => {
   });
 
   it("should create an invoice", async () => {
-    const repository = new InvoiceRepository();
-    const generateUseCase = new GenerateInvoiceUseCase(repository);
-    const facade = new InvoiceFacade({
-      generateUseCase: generateUseCase,
-      findUseCase: undefined,
-    });
+    // const repository = new InvoiceRepository();
+    // const generateUseCase = new GenerateInvoiceUseCase(repository);
+    // const facade = new InvoiceFacade({
+    //   generateUseCase: generateUseCase,
+    //   findUseCase: undefined,
+    // });
+    const facade = InvoiceFacadeFactory.create();
     const input: GenerateInvoiceFacadeInputDto = {
       id: "1",
       name: "Janie Patton",
@@ -73,13 +71,14 @@ describe("InvoiceFacade test", () => {
   });
 
   it("should find a invoice", async () => {
-    const repository = new InvoiceRepository();
-    const generateUseCase = new GenerateInvoiceUseCase(repository);
-    const findUseCase = new FindInvoiceUseCase(repository);
-    const facade = new InvoiceFacade({
-      generateUseCase: generateUseCase,
-      findUseCase: findUseCase,
-    });
+    // const repository = new InvoiceRepository();
+    // const generateUseCase = new GenerateInvoiceUseCase(repository);
+    // const findUseCase = new FindInvoiceUseCase(repository);
+    // const facade = new InvoiceFacade({
+    //   generateUseCase: generateUseCase,
+    //   findUseCase: findUseCase,
+    // });
+    const facade = InvoiceFacadeFactory.create();
     const input: GenerateInvoiceFacadeInputDto = {
       id: "1",
       name: "Janie Patton",
