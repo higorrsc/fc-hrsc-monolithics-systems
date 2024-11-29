@@ -192,7 +192,7 @@ describe("PlaceOrderUseCase unit test", () => {
       };
 
       const mockInvoiceFacade = {
-        create: jest.fn().mockResolvedValue({ id: "1i" }),
+        generate: jest.fn().mockResolvedValue({ id: "1i" }),
       };
 
       const placeOrderUseCase = new PlaceOrderUseCase(
@@ -266,7 +266,7 @@ describe("PlaceOrderUseCase unit test", () => {
           orderId: output.id,
           amount: output.total,
         });
-        expect(mockInvoiceFacade.create).toHaveBeenCalledTimes(0);
+        expect(mockInvoiceFacade.generate).toHaveBeenCalledTimes(0);
       });
 
       it("should be approved", async () => {
@@ -301,8 +301,8 @@ describe("PlaceOrderUseCase unit test", () => {
           orderId: output.id,
           amount: output.total,
         });
-        expect(mockInvoiceFacade.create).toHaveBeenCalledTimes(1);
-        expect(mockInvoiceFacade.create).toHaveBeenCalledWith({
+        expect(mockInvoiceFacade.generate).toHaveBeenCalledTimes(1);
+        expect(mockInvoiceFacade.generate).toHaveBeenCalledWith({
           name: clientProps.name,
           document: clientProps.document,
           street: clientProps.street,
