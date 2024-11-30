@@ -10,7 +10,7 @@ describe("Client API E2E tests", () => {
     await sequelize.close();
   });
 
-  it("should create a client without pass id", async () => {
+  it("should create a client without passing id", async () => {
     const response = await request(app).post("/clients").send({
       name: "Higor Cruz",
       email: "higorrsc@gmail.com",
