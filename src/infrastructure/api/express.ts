@@ -7,10 +7,11 @@ import { InvoiceModel } from "../../modules/invoice/repository/invoice.model";
 import { TransactionModel } from "../../modules/payment/repository/transaction.model";
 import { ProductModel } from "../../modules/product-adm/repository/product.model";
 import { ProductModel as ProductStoreCatalogModel } from "../../modules/store-catalog/repository/product.model";
-import { migrator } from "../migrations/config/migrator";
+import { clientRoute } from "./routes/client.route";
 
 export const app: Express = express();
 app.use(express.json());
+app.use("/clients", clientRoute);
 
 export let sequelize: Sequelize;
 export let migration: Umzug<any>;
@@ -20,7 +21,7 @@ async function setupDb() {
     dialect: "sqlite",
     storage: ":memory:",
     logging: false,
-    // sync: { force: true },
+    sync: { force: true },
   });
   sequelize.addModels([
     ProductModel,
@@ -30,8 +31,8 @@ async function setupDb() {
     InvoiceModel,
     InvoiceItemModel,
   ]);
-  // await sequelize.sync();
-  migration = migrator(sequelize);
-  await migration.up();
+  await sequelize.sync();
+  // migration = migrator(sequelize);
+  // await migration.up();
 }
 setupDb();
