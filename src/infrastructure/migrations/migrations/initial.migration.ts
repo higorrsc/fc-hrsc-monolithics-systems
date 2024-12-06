@@ -1,4 +1,4 @@
-import { DataTypes, Sequelize } from "sequelize";
+import { DataType, Sequelize } from "sequelize-typescript";
 import { MigrationFn } from "umzug";
 
 export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
@@ -24,52 +24,52 @@ export const down: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
 async function createTableClients(sequelize: Sequelize) {
   await sequelize.getQueryInterface().createTable("clients", {
     id: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       primaryKey: true,
       allowNull: false,
     },
     name: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     email: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     document: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     street: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     number: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     complement: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     city: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     state: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     zipCode: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     createdAt: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
     updatedAt: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
   });
@@ -78,36 +78,36 @@ async function createTableClients(sequelize: Sequelize) {
 async function createTableProducts(sequelize: Sequelize) {
   await sequelize.getQueryInterface().createTable("products", {
     id: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       primaryKey: true,
       allowNull: false,
     },
     name: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     purchasePrice: {
-      type: DataTypes.NUMBER,
+      type: DataType.NUMBER,
       allowNull: true,
     },
     salesPrice: {
-      type: DataTypes.NUMBER,
+      type: DataType.NUMBER,
       allowNull: true,
     },
     stock: {
-      type: DataTypes.NUMBER,
+      type: DataType.NUMBER,
       allowNull: true,
     },
     createdAt: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
     updatedAt: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
   });
@@ -116,52 +116,52 @@ async function createTableProducts(sequelize: Sequelize) {
 async function createTableInvoices(sequelize: Sequelize) {
   await sequelize.getQueryInterface().createTable("invoices", {
     id: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       primaryKey: true,
       allowNull: false,
     },
     name: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     document: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     street: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     number: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     complement: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     city: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     state: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     zipCode: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     total: {
-      type: DataTypes.NUMBER,
+      type: DataType.NUMBER,
       allowNull: false,
     },
     createdAt: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
     updatedAt: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
   });
@@ -170,36 +170,36 @@ async function createTableInvoices(sequelize: Sequelize) {
 async function createTableInvoiceItems(sequelize: Sequelize) {
   await sequelize.getQueryInterface().createTable("invoice_items", {
     id: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       primaryKey: true,
       allowNull: false,
     },
     invoiceId: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     name: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     price: {
-      type: DataTypes.NUMBER,
+      type: DataType.NUMBER,
       allowNull: false,
     },
     quantity: {
-      type: DataTypes.NUMBER,
+      type: DataType.NUMBER,
       allowNull: false,
     },
     total: {
-      type: DataTypes.NUMBER,
+      type: DataType.NUMBER,
       allowNull: false,
     },
     createdAt: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
     updatedAt: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
   });
@@ -208,28 +208,28 @@ async function createTableInvoiceItems(sequelize: Sequelize) {
 async function createTableTransactions(sequelize: Sequelize) {
   await sequelize.getQueryInterface().createTable("transactions", {
     id: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       primaryKey: true,
       allowNull: false,
     },
     amount: {
-      type: DataTypes.NUMBER,
+      type: DataType.NUMBER,
       allowNull: false,
     },
     orderId: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     status: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     createdAt: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
     updatedAt: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
   });
@@ -238,28 +238,28 @@ async function createTableTransactions(sequelize: Sequelize) {
 async function createTableOrders(sequelize: Sequelize) {
   await sequelize.getQueryInterface().createTable("orders", {
     id: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       primaryKey: true,
       allowNull: false,
     },
     clientId: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     total: {
-      type: DataTypes.NUMBER,
+      type: DataType.NUMBER,
       allowNull: false,
     },
     status: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     createdAt: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
     updatedAt: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
   });
@@ -268,36 +268,36 @@ async function createTableOrders(sequelize: Sequelize) {
 async function createTableOrderItems(sequelize: Sequelize) {
   await sequelize.getQueryInterface().createTable("order_items", {
     id: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       primaryKey: true,
       allowNull: false,
     },
     orderId: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     productId: {
-      type: DataTypes.STRING(255),
+      type: DataType.STRING(255),
       allowNull: false,
     },
     quantity: {
-      type: DataTypes.NUMBER,
+      type: DataType.NUMBER,
       allowNull: false,
     },
     price: {
-      type: DataTypes.NUMBER,
+      type: DataType.NUMBER,
       allowNull: false,
     },
     total: {
-      type: DataTypes.NUMBER,
+      type: DataType.NUMBER,
       allowNull: false,
     },
     createdAt: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
     updatedAt: {
-      type: DataTypes.DATE,
+      type: DataType.DATE,
       allowNull: false,
     },
   });
