@@ -3,7 +3,19 @@ export interface AddProductFacadeInputDto {
   name: string;
   description: string;
   purchasePrice: number;
+  salesPrice?: number;
   stock: number;
+}
+
+export interface AddProductFacadeOutputDto {
+  id: string;
+  name: string;
+  description: string;
+  purchasePrice: number;
+  salesPrice: number;
+  stock: number;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface CheckStockFacadeInputDto {

@@ -12,7 +12,7 @@ export default class AddProductUseCase {
 
   async execute(input: AddProductInputDto): Promise<AddProductOutputDto> {
     const props = {
-      id: new Id(input.id),
+      id: new Id(input.id) || new Id(),
       name: input.name,
       description: input.description,
       purchasePrice: input.purchasePrice,
