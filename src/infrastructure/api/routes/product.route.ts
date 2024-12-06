@@ -1,28 +1,16 @@
 import express, { Request, Response } from "express";
-import ProductRepository from "../../../modules/product-adm/repository/product.repository";
-import {
-  AddProductInputDto,
-  AddProductOutputDto,
-} from "../../../modules/product-adm/usecase/add-product/add-product.dto";
-import AddProductUseCase from "../../../modules/product-adm/usecase/add-product/add-product.usecase";
+import ProductAdmFacadeInterface from "../../../modules/product-adm/facade/product-adm.facade.interface";
+import ProductAdmFacadeFactory from "../../../modules/product-adm/factory/product-adm.facade.factory";
 
 export const productRoute = express.Router();
 productRoute.post("/", async (req: Request, res: Response) => {
-  const useCase = new AddProductUseCase(new ProductRepository());
   try {
-    let productDto: AddProductInputDto;
-    productDto = {
-      name: req.body.name,
-      description: req.body.description,
-      purchasePrice: req.body.purchasePrice,
-      stock: req.body.stock,
-    };
-    if (req.body.id) {
-      productDto.id = req.body.id;
-    }
-    const output: AddProductOutputDto = await useCase.execute(productDto);
-    res.send(output);
+    const productFacade: ProductAdmFacadeInterface =
+      ProductAdmFacadeFactory.create();
+    const result = await productFacade.addProduct(req.body);
+    res.status(201).send(result);
   } catch (err) {
+    console.log(err);
     res.status(500).send(err);
   }
 });
