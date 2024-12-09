@@ -91,6 +91,7 @@ describe("PlaceOrderUseCase unit test", () => {
           id: "0",
           name: "Product 0",
           description: "Product 0 description",
+          quantity: 0,
           salesPrice: 0,
         }),
       };
@@ -102,6 +103,7 @@ describe("PlaceOrderUseCase unit test", () => {
           id: new Id("0"),
           name: "Product 0",
           description: "Product 0 description",
+          quantity: 0,
           salesPrice: 0,
         })
       );
@@ -187,8 +189,8 @@ describe("PlaceOrderUseCase unit test", () => {
       };
 
       const mockCheckoutRepository = {
-        addOrder: jest.fn(),
-        findOrder: jest.fn(),
+        add: jest.fn(),
+        find: jest.fn(),
       };
 
       const mockInvoiceFacade = {
@@ -209,12 +211,14 @@ describe("PlaceOrderUseCase unit test", () => {
           id: new Id("1"),
           name: "Product 1",
           description: "some description",
+          quantity: 10,
           salesPrice: 40,
         }),
         "2": new Product({
           id: new Id("2"),
           name: "Product 2",
           description: "some description",
+          quantity: 10,
           salesPrice: 30,
         }),
       };
@@ -250,7 +254,7 @@ describe("PlaceOrderUseCase unit test", () => {
 
         let output = await placeOrderUseCase.execute(input);
         expect(output.invoiceId).toBeNull();
-        expect(output.total).toEqual(70);
+        expect(output.total).toEqual(700);
         expect(output.products).toStrictEqual([
           { productId: "1" },
           { productId: "2" },
@@ -260,7 +264,7 @@ describe("PlaceOrderUseCase unit test", () => {
         expect(mockValidateProducts).toHaveBeenCalledTimes(1);
         expect(mockValidateProducts).toHaveBeenCalledWith(input);
         expect(mockGetProduct).toHaveBeenCalledTimes(2);
-        expect(mockCheckoutRepository.addOrder).toHaveBeenCalledTimes(1);
+        expect(mockCheckoutRepository.add).toHaveBeenCalledTimes(1);
         expect(mockPaymentFacade.process).toHaveBeenCalledTimes(1);
         expect(mockPaymentFacade.process).toHaveBeenCalledWith({
           orderId: output.id,
@@ -286,7 +290,7 @@ describe("PlaceOrderUseCase unit test", () => {
 
         let output = await placeOrderUseCase.execute(input);
         // expect(output.invoiceId).toEqual("1i");
-        expect(output.total).toEqual(70);
+        expect(output.total).toEqual(700);
         expect(output.products).toStrictEqual([
           { productId: "1" },
           { productId: "2" },
@@ -295,7 +299,7 @@ describe("PlaceOrderUseCase unit test", () => {
         expect(mockClientFacade.findClient).toHaveBeenCalledWith({ id: "1c" });
         expect(mockValidateProducts).toHaveBeenCalledTimes(1);
         expect(mockGetProduct).toHaveBeenCalledTimes(2);
-        expect(mockCheckoutRepository.addOrder).toHaveBeenCalledTimes(1);
+        expect(mockCheckoutRepository.add).toHaveBeenCalledTimes(1);
         expect(mockPaymentFacade.process).toBeCalledTimes(1);
         expect(mockPaymentFacade.process).toHaveBeenCalledWith({
           orderId: output.id,

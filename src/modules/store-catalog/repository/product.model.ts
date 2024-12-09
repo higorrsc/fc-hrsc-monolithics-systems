@@ -16,5 +16,8 @@ export class ProductModel extends Model {
   description: string;
 
   @Column({ allowNull: false })
+  quantity: number;
+
+  @Column({ allowNull: false })
   salesPrice: number;
 }

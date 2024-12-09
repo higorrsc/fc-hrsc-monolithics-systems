@@ -26,12 +26,14 @@ describe("ProductRepository test", () => {
       id: "1",
       name: "Product 1",
       description: "Product 1 description",
+      quantity: 1,
       salesPrice: 100,
     });
     const product2 = await ProductModel.create({
       id: "2",
       name: "Product 2",
       description: "Product 2 description",
+      quantity: 1,
       salesPrice: 200,
     });
     const productRepository = new ProductRepository();
@@ -52,6 +54,7 @@ describe("ProductRepository test", () => {
       id: "1",
       name: "Product 1",
       description: "Product 1 description",
+      quantity: 1,
       salesPrice: 100,
     });
     const productRepository = new ProductRepository();
