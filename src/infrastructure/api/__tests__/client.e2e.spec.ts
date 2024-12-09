@@ -1,16 +1,17 @@
 import request from "supertest";
 import { migrator } from "../../migrations/config/migrator";
-import { app, sequelize } from "../express";
+import { app } from "../express";
+import { sequelize } from "../server";
 
 describe("Client API E2E tests", () => {
   const migration = migrator(sequelize);
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     // await sequelize.sync({ force: true });
     await migration.up();
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     // await sequelize.close();
     await migration.down();
   });

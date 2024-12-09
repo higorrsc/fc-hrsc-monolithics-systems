@@ -1,6 +1,7 @@
 import request from "supertest";
 import { migrator } from "../../migrations/config/migrator";
-import { app, sequelize } from "../express";
+import { app } from "../express";
+import { sequelize } from "../server";
 
 describe("Product API E2E tests", () => {
   const migration = migrator(sequelize);
