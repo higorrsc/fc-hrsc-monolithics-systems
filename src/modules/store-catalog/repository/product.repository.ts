@@ -12,14 +12,7 @@ export default class ProductRepository implements ProductGateway {
           id: new Id(product.id),
           name: product.name,
           description: product.description,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
           quantity: product.quantity,
->>>>>>> 4fada72 (feat: add back old data)
-=======
-          quantity: product.quantity,
->>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12
           salesPrice: product.salesPrice,
         })
     );
@@ -30,14 +23,7 @@ export default class ProductRepository implements ProductGateway {
       id: new Id(product.id),
       name: product.name,
       description: product.description,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
       quantity: product.quantity,
->>>>>>> 4fada72 (feat: add back old data)
-=======
-      quantity: product.quantity,
->>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12
       salesPrice: product.salesPrice,
     });
   }

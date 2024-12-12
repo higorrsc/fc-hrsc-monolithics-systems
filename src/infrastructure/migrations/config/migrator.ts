@@ -1,24 +1,6 @@
 import { join } from "path";
-<<<<<<< HEAD
 import { Model, ModelCtor, Sequelize } from "sequelize-typescript";
 import { SequelizeStorage, Umzug } from "umzug";
-
-// export const migrator = (sequelize: Sequelize) => {
-//   return new Umzug({
-//     migrations: {
-//       glob: [
-//         "infrastructure/migrations/migrations/*.{js,ts}",
-//         {
-//           cwd: join(__dirname, "../../../"),
-//           ignore: ["**/*.d.ts", "**/*.spec.ts", "**/index.js", "**/index.ts"],
-//         },
-//       ],
-//     },
-//     context: sequelize,
-//     storage: new SequelizeStorage({ sequelize }),
-//     logger: console,
-//   });
-// };
 
 export type MigratorProps = {
   models: ModelCtor<Model>[];
@@ -65,24 +47,3 @@ export class Migrator {
     await this._sequelize.close();
   }
 }
-=======
-import { Sequelize } from "sequelize-typescript";
-import { SequelizeStorage, Umzug } from "umzug";
-
-export const migrator = (sequelize: Sequelize) => {
-  return new Umzug({
-    migrations: {
-      glob: [
-        "infrastructure/migrations/migrations/*.{js,ts}",
-        {
-          cwd: join(__dirname, "../../../"),
-          ignore: ["**/*.d.ts", "**/*.spec.ts", "**/index.js", "**/index.ts"],
-        },
-      ],
-    },
-    context: sequelize,
-    storage: new SequelizeStorage({ sequelize }),
-    logger: console,
-  });
-};
->>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12

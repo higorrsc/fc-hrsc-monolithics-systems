@@ -26,28 +26,14 @@ describe("ProductRepository test", () => {
       id: "1",
       name: "Product 1",
       description: "Product 1 description",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
       quantity: 1,
->>>>>>> 4fada72 (feat: add back old data)
-=======
-      quantity: 1,
->>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12
       salesPrice: 100,
     });
     const product2 = await ProductModel.create({
       id: "2",
       name: "Product 2",
       description: "Product 2 description",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
       quantity: 1,
->>>>>>> 4fada72 (feat: add back old data)
-=======
-      quantity: 1,
->>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12
       salesPrice: 200,
     });
     const productRepository = new ProductRepository();
@@ -68,14 +54,7 @@ describe("ProductRepository test", () => {
       id: "1",
       name: "Product 1",
       description: "Product 1 description",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
       quantity: 1,
->>>>>>> 4fada72 (feat: add back old data)
-=======
-      quantity: 1,
->>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12
       salesPrice: 100,
     });
     const productRepository = new ProductRepository();

@@ -1,5 +1,4 @@
 import request from "supertest";
-<<<<<<< HEAD
 import { Migrator } from "../../migrations/config/migrator";
 import { migratorE2E } from "../db.config";
 import { app } from "../express";
@@ -14,23 +13,6 @@ describe("Client API E2E tests", () => {
 
   afterEach(async () => {
     await migrator.down();
-=======
-import { migrator } from "../../migrations/config/migrator";
-import { app } from "../express";
-import { sequelize } from "../server";
-
-describe("Client API E2E tests", () => {
-  const migration = migrator(sequelize);
-
-  beforeAll(async () => {
-    // await sequelize.sync({ force: true });
-    await migration.up();
-  });
-
-  afterAll(async () => {
-    // await sequelize.close();
-    await migration.down();
->>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12
   });
 
   it("should create a client without passing id", async () => {
