@@ -17,10 +17,16 @@ export class ProductModel extends Model {
 
   @Column({ allowNull: false })
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   quantity: number;
 
   @Column({ allowNull: false })
 >>>>>>> 4fada72 (feat: add back old data)
+=======
+  quantity: number;
+
+  @Column({ allowNull: false })
+>>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12
   salesPrice: number;
 }

@@ -2,8 +2,13 @@ node_modules
 .vscode
 .swc
 <<<<<<< HEAD
+<<<<<<< HEAD
 dist
 =======
 dist
 *.sqlite
 >>>>>>> 4fada72 (feat: add back old data)
+=======
+dist
+*.sqlite
+>>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12

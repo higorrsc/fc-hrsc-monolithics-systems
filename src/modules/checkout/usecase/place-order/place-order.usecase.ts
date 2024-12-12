@@ -94,10 +94,14 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
     // mudar o status da order para approved
     payment.status === "approved" && order.approved();
 <<<<<<< HEAD
+<<<<<<< HEAD
     this._repository.addOrder(order);
 =======
     this._repository.add(order);
 >>>>>>> 4fada72 (feat: add back old data)
+=======
+    this._repository.add(order);
+>>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12
     // retornar DTO
     return {
       id: order.id.id,
@@ -137,9 +141,13 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
       name: product.name,
       description: product.description,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       quantity: product.quantity,
 >>>>>>> 4fada72 (feat: add back old data)
+=======
+      quantity: product.quantity,
+>>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12
       salesPrice: product.salesPrice,
     };
     return new Product(productProps);

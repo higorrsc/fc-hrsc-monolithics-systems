@@ -9,10 +9,15 @@ type OrderProps = {
   products: Product[];
   status?: string;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   createdAt?: Date;
   updatedAt?: Date;
 >>>>>>> 4fada72 (feat: add back old data)
+=======
+  createdAt?: Date;
+  updatedAt?: Date;
+>>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12
 };
 
 export default class Order extends BaseEntity {
@@ -22,10 +27,14 @@ export default class Order extends BaseEntity {
 
   constructor(props: OrderProps) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     super(props.id);
 =======
     super(props.id, props.createdAt, props.updatedAt);
 >>>>>>> 4fada72 (feat: add back old data)
+=======
+    super(props.id, props.createdAt, props.updatedAt);
+>>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12
     this._client = props.client;
     this._products = props.products;
     this._status = props.status || "pending";
@@ -49,12 +58,18 @@ export default class Order extends BaseEntity {
 
   get total(): number {
 <<<<<<< HEAD
+<<<<<<< HEAD
     return this._products.reduce((acc, product) => acc + product.salesPrice, 0);
 =======
+=======
+>>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12
     return this._products.reduce(
       (acc, product) => acc + product.quantity * product.salesPrice,
       0
     );
+<<<<<<< HEAD
 >>>>>>> 4fada72 (feat: add back old data)
+=======
+>>>>>>> 84f55c57fd4281882faca8cd25a5c391224c1a12
   }
 }
