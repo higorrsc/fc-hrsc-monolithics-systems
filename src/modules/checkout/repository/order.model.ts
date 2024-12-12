@@ -1,26 +1,23 @@
 import { Column, Model, PrimaryKey, Table } from "sequelize-typescript";
 
 @Table({
-  tableName: "products",
+  tableName: "orders",
   timestamps: false,
 })
-export class ProductModel extends Model {
+export class OrderModel extends Model {
   @PrimaryKey
   @Column({ allowNull: false })
   id: string;
 
   @Column({ allowNull: false })
-  name: string;
+  clientId: string;
 
   @Column({ allowNull: false })
-  description: string;
+  status: string;
 
   @Column({ allowNull: false })
-<<<<<<< HEAD
-=======
-  quantity: number;
+  createdAt: Date;
 
   @Column({ allowNull: false })
->>>>>>> 4fada72 (feat: add back old data)
-  salesPrice: number;
+  updatedAt: Date;
 }

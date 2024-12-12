@@ -10,6 +10,10 @@ export default class FindProductUseCase implements UseCaseInterface {
       id: product.id.id,
       name: product.name,
       description: product.description,
+<<<<<<< HEAD
+=======
+      quantity: product.quantity,
+>>>>>>> 4fada72 (feat: add back old data)
       salesPrice: product.salesPrice,
     };
   }

@@ -12,7 +12,11 @@ export default class AddProductUseCase {
 
   async execute(input: AddProductInputDto): Promise<AddProductOutputDto> {
     const props = {
+<<<<<<< HEAD
       id: new Id(input.id),
+=======
+      id: new Id(input.id) || new Id(),
+>>>>>>> 4fada72 (feat: add back old data)
       name: input.name,
       description: input.description,
       purchasePrice: input.purchasePrice,
