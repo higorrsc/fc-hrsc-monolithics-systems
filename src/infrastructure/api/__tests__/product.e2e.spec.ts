@@ -1,19 +1,18 @@
 import request from "supertest";
-import { migrator } from "../../migrations/config/migrator";
+import { Migrator } from "../../migrations/config/migrator";
+import { migratorE2E } from "../db.config";
 import { app } from "../express";
-import { sequelize } from "../server";
 
 describe("Product API E2E tests", () => {
-  const migration = migrator(sequelize);
+  let migrator: Migrator;
 
-  beforeAll(async () => {
-    // await sequelize.sync({ force: true });
-    await migration.up();
+  beforeEach(async () => {
+    migrator = migratorE2E();
+    await migrator.up();
   });
 
-  afterAll(async () => {
-    // await sequelize.close();
-    await migration.down();
+  afterEach(async () => {
+    await migrator.down();
   });
 
   it("should create a product without passing id", async () => {
