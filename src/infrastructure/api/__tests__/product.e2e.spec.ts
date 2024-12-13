@@ -1,13 +1,13 @@
 import request from "supertest";
 import { Migrator } from "../../migrations/config/migrator";
-import { migratorE2E } from "../db.config";
+import { CreateMigrator } from "../db.config";
 import { app } from "../express";
 
 describe("Product API E2E tests", () => {
   let migrator: Migrator;
 
   beforeEach(async () => {
-    migrator = migratorE2E();
+    migrator = CreateMigrator();
     await migrator.up();
   });
 

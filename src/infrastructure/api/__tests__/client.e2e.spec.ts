@@ -1,13 +1,13 @@
 import request from "supertest";
 import { Migrator } from "../../migrations/config/migrator";
-import { migratorE2E } from "../db.config";
+import { CreateMigrator } from "../db.config";
 import { app } from "../express";
 
 describe("Client API E2E tests", () => {
   let migrator: Migrator;
 
   beforeEach(async () => {
-    migrator = migratorE2E();
+    migrator = CreateMigrator();
     await migrator.up();
   });
 
@@ -43,7 +43,6 @@ describe("Client API E2E tests", () => {
       state: "WW",
       zipCode: "15926",
     });
-    console.log(response.body);
     expect(response.status).toBe(201);
   });
 });

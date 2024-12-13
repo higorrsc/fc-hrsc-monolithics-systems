@@ -105,7 +105,6 @@ describe("OrderRepository test", () => {
       id: "prod-1",
       name: "Product 1",
       description: "Product 1 description",
-      quantity: 1,
       salesPrice: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -114,7 +113,6 @@ describe("OrderRepository test", () => {
       id: "prod-2",
       name: "Product 2",
       description: "Product 2 description",
-      quantity: 2,
       salesPrice: 2,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -164,12 +162,12 @@ describe("OrderRepository test", () => {
     expect(foundOrder.products[0].id.id).toEqual(product1.id);
     expect(foundOrder.products[0].name).toEqual(product1.name);
     expect(foundOrder.products[0].description).toEqual(product1.description);
-    expect(foundOrder.products[0].quantity).toEqual(product1.quantity);
     expect(foundOrder.products[0].salesPrice).toEqual(product1.salesPrice);
+    expect(foundOrder.products[0].quantity).toEqual(orderItem1.quantity);
     expect(foundOrder.products[1].id.id).toEqual(product2.id);
     expect(foundOrder.products[1].name).toEqual(product2.name);
     expect(foundOrder.products[1].description).toEqual(product2.description);
-    expect(foundOrder.products[1].quantity).toEqual(product2.quantity);
     expect(foundOrder.products[1].salesPrice).toEqual(product2.salesPrice);
+    expect(foundOrder.products[1].quantity).toEqual(orderItem2.quantity);
   });
 });

@@ -34,7 +34,12 @@ describe("PlaceOrderUseCase unit test", () => {
 
       let input: PlaceOrderInputDto = {
         clientId: "0",
-        products: [{ productId: "1" }],
+        products: [
+          {
+            productId: "1",
+            quantity: 0,
+          },
+        ],
       };
       await expect(
         placeOrderUseCase["validateProducts"](input)
@@ -42,7 +47,16 @@ describe("PlaceOrderUseCase unit test", () => {
 
       input = {
         clientId: "0",
-        products: [{ productId: "0" }, { productId: "1" }],
+        products: [
+          {
+            productId: "0",
+            quantity: 0,
+          },
+          {
+            productId: "1",
+            quantity: 0,
+          },
+        ],
       };
       await expect(
         placeOrderUseCase["validateProducts"](input)
@@ -51,7 +65,20 @@ describe("PlaceOrderUseCase unit test", () => {
 
       input = {
         clientId: "0",
-        products: [{ productId: "0" }, { productId: "1" }, { productId: "2" }],
+        products: [
+          {
+            productId: "0",
+            quantity: 0,
+          },
+          {
+            productId: "1",
+            quantity: 0,
+          },
+          {
+            productId: "2",
+            quantity: 0,
+          },
+        ],
       };
       await expect(
         placeOrderUseCase["validateProducts"](input)
@@ -249,7 +276,16 @@ describe("PlaceOrderUseCase unit test", () => {
 
         const input: PlaceOrderInputDto = {
           clientId: "1c",
-          products: [{ productId: "1" }, { productId: "2" }],
+          products: [
+            {
+              productId: "1",
+              quantity: 1,
+            },
+            {
+              productId: "2",
+              quantity: 1,
+            },
+          ],
         };
 
         let output = await placeOrderUseCase.execute(input);
@@ -285,7 +321,16 @@ describe("PlaceOrderUseCase unit test", () => {
 
         const input: PlaceOrderInputDto = {
           clientId: "1c",
-          products: [{ productId: "1" }, { productId: "2" }],
+          products: [
+            {
+              productId: "1",
+              quantity: 0,
+            },
+            {
+              productId: "2",
+              quantity: 0,
+            },
+          ],
         };
 
         let output = await placeOrderUseCase.execute(input);

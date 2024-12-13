@@ -65,6 +65,8 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
       client: myClient,
       products,
     });
+    console.log(order.products);
+    console.log(order.total);
     // processar o pagamento -> paymentFacade.process(orderId, amount)
     const payment = await this._paymentFacade.process({
       orderId: order.id.id,

@@ -3,7 +3,7 @@ import Id from "../../../modules/@shared/domain/value-object/id.value-object";
 import { ClientModel } from "../../../modules/client-adm/repository/client.model";
 import { ProductModel } from "../../../modules/product-adm/repository/product.model";
 import { Migrator } from "../../migrations/config/migrator";
-import { migratorE2E } from "../db.config";
+import { CreateMigrator } from "../db.config";
 import { app } from "../express";
 
 describe("Checkout API E2E tests", () => {
@@ -16,7 +16,7 @@ describe("Checkout API E2E tests", () => {
   };
 
   beforeEach(async () => {
-    migrator = migratorE2E();
+    migrator = CreateMigrator();
     await migrator.up();
 
     testId = {

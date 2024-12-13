@@ -9,7 +9,7 @@ export class TransactionModel extends Model {
   @Column({ allowNull: false })
   id: string;
 
-  @Column({ allowNull: false, field: "order_id" })
+  @Column({ allowNull: false })
   orderId: string;
 
   @Column({ allowNull: false })
@@ -18,9 +18,9 @@ export class TransactionModel extends Model {
   @Column({ allowNull: false })
   status: string;
 
-  @Column({ allowNull: false, field: "created_at" })
+  @Column({ allowNull: false })
   createdAt: Date;
 
-  @Column({ allowNull: false, field: "updated_at" })
+  @Column({ allowNull: false })
   updatedAt: Date;
 }
