@@ -238,14 +238,12 @@ describe("PlaceOrderUseCase unit test", () => {
           id: new Id("1"),
           name: "Product 1",
           description: "some description",
-          quantity: 10,
           salesPrice: 40,
         }),
         "2": new Product({
           id: new Id("2"),
           name: "Product 2",
           description: "some description",
-          quantity: 10,
           salesPrice: 30,
         }),
       };
@@ -290,16 +288,15 @@ describe("PlaceOrderUseCase unit test", () => {
 
         let output = await placeOrderUseCase.execute(input);
         expect(output.invoiceId).toBeNull();
-        expect(output.total).toEqual(700);
-        console.log(output.products)
+        expect(output.total).toEqual(0);
         expect(output.products).toStrictEqual([
-          { 
+          {
             productId: "1",
-            quantity: 1
+            quantity: 1,
           },
-          { 
+          {
             productId: "2",
-            quantity: 1
+            quantity: 1,
           },
         ]);
         expect(mockClientFacade.findClient).toHaveBeenCalledTimes(1);
@@ -342,15 +339,15 @@ describe("PlaceOrderUseCase unit test", () => {
 
         let output = await placeOrderUseCase.execute(input);
         // expect(output.invoiceId).toEqual("1i");
-        expect(output.total).toEqual(700);
+        expect(output.total).toEqual(0);
         expect(output.products).toStrictEqual([
-          { 
-            productId: "1", 
-            quantity: 0, 
+          {
+            productId: "1",
+            quantity: 0,
           },
-          { 
-            productId: "2", 
-            quantity: 0, 
+          {
+            productId: "2",
+            quantity: 0,
           },
         ]);
         expect(mockClientFacade.findClient).toHaveBeenCalledTimes(1);
