@@ -13,7 +13,6 @@ export default class ProcessPaymentUseCase implements UseCaseInterface {
     input: ProcessPaymentInputDto
   ): Promise<ProcessPaymentOutputDto> {
     try {
-      console.log(input);
       const transaction = new Transaction({
         orderId: input.orderId,
         amount: input.amount,
