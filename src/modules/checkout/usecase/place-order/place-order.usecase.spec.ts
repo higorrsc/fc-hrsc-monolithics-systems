@@ -130,7 +130,6 @@ describe("PlaceOrderUseCase unit test", () => {
           id: new Id("0"),
           name: "Product 0",
           description: "Product 0 description",
-          quantity: 0,
           salesPrice: 0,
         })
       );
