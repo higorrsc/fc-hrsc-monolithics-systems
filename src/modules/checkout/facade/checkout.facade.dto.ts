@@ -1,6 +1,9 @@
 export interface CheckoutFacadeInputDto {
   clientId: string;
-  products: { productId: string }[];
+  products: { 
+    productId: string, 
+    quantity: number 
+  }[];
 }
 
 export interface CheckoutFacadeOutputDto {
@@ -9,5 +12,8 @@ export interface CheckoutFacadeOutputDto {
   clientId: string;
   status: string;
   total: number;
-  products: { productId: string }[];
+  products: { 
+    productId: string, 
+    quantity: number 
+  }[];
 }
