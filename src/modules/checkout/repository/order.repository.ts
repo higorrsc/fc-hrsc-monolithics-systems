@@ -2,8 +2,8 @@ import Id from "../../@shared/domain/value-object/id.value-object";
 import { ClientModel } from "../../client-adm/repository/client.model";
 import { ProductModel } from "../../store-catalog/repository/product.model";
 import Client from "../domain/client.entity";
+import OrderItem from "../domain/order-item.entity";
 import Order from "../domain/order.entity";
-import Product from "../domain/product.entity";
 import CheckoutGateway from "../gateway/checkout.gateway";
 import { OrderItemModel } from "./order-item.model";
 import { OrderModel } from "./order.model";
@@ -18,13 +18,13 @@ export class OrderRepository implements CheckoutGateway {
       updatedAt: new Date(),
     });
 
-    order.products.map(async (product) => {
+    order.items.map(async (item) => {
       await OrderItemModel.create({
         id: new Id().id,
         orderId: order.id.id,
-        productId: product.id.id,
-        quantity: product.quantity,
-        price: product.salesPrice,
+        productId: item.id.id,
+        quantity: item.quantity,
+        price: item.price,
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -69,12 +69,10 @@ export class OrderRepository implements CheckoutGateway {
         state: client.state,
         zipCode: client.zipCode,
       }),
-      products: orderItemsData.map((item) => {
-        return new Product({
-          id: new Id(item.productId),
-          name: item.name,
-          description: item.description,
-          salesPrice: item.price,
+      items: orderItemsData.map((item) => {
+        return new OrderItem({
+          productId: item.productId,
+          price: item.price,
           quantity: item.quantity,
         });
       }),

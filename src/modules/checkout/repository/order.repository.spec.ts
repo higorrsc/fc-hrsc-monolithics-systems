@@ -3,6 +3,7 @@ import Id from "../../@shared/domain/value-object/id.value-object";
 import { ClientModel } from "../../client-adm/repository/client.model";
 import { ProductModel } from "../../store-catalog/repository/product.model";
 import Client from "../domain/client.entity";
+import OrderItem from "../domain/order-item.entity";
 import Order from "../domain/order.entity";
 import Product from "../domain/product.entity";
 import { OrderItemModel } from "./order-item.model";
@@ -50,21 +51,30 @@ describe("OrderRepository test", () => {
       id: new Id("1"),
       name: "Product 1",
       description: "Product 1 description",
-      quantity: 1,
       salesPrice: 1,
     });
     const product2 = new Product({
       id: new Id("2"),
       name: "Product 2",
       description: "Product 2 description",
-      quantity: 2,
       salesPrice: 2,
     });
     const order = new Order({
       id: new Id("order-1"),
       client: client,
       status: "open",
-      products: [product1, product2],
+      items: [
+        new OrderItem({
+          productId: product1.id.id,
+          price: product1.salesPrice,
+          quantity: 1,
+        }),
+        new OrderItem({
+          productId: product2.id.id,
+          price: product2.salesPrice,
+          quantity: 2,
+        }),
+      ],
     });
     const orderRepository = new OrderRepository();
     await orderRepository.add(order);
@@ -81,9 +91,9 @@ describe("OrderRepository test", () => {
     expect(orderDb.status).toEqual(order.status);
     expect(orderItemDb).toBeDefined();
     expect(orderItemDb.orderId).toEqual(order.id.id);
-    expect(orderItemDb.productId).toEqual(order.products[0].id.id);
-    expect(orderItemDb.quantity).toEqual(order.products[0].quantity);
-    expect(orderItemDb.price).toEqual(order.products[0].salesPrice);
+    expect(orderItemDb.productId).toEqual(order.items[0].id.id);
+    expect(orderItemDb.quantity).toEqual(order.items[0].quantity);
+    expect(orderItemDb.price).toEqual(order.items[0].price);
   });
 
   it("should find an order", async () => {
@@ -158,16 +168,12 @@ describe("OrderRepository test", () => {
     expect(foundOrder.client.state).toEqual(client.state);
     expect(foundOrder.client.zipCode).toEqual(client.zipCode);
     expect(foundOrder.status).toEqual(order.status);
-    expect(foundOrder.products).toHaveLength(2);
-    expect(foundOrder.products[0].id.id).toEqual(product1.id);
-    expect(foundOrder.products[0].name).toEqual(product1.name);
-    expect(foundOrder.products[0].description).toEqual(product1.description);
-    expect(foundOrder.products[0].salesPrice).toEqual(product1.salesPrice);
-    expect(foundOrder.products[0].quantity).toEqual(orderItem1.quantity);
-    expect(foundOrder.products[1].id.id).toEqual(product2.id);
-    expect(foundOrder.products[1].name).toEqual(product2.name);
-    expect(foundOrder.products[1].description).toEqual(product2.description);
-    expect(foundOrder.products[1].salesPrice).toEqual(product2.salesPrice);
-    expect(foundOrder.products[1].quantity).toEqual(orderItem2.quantity);
+    expect(foundOrder.items).toHaveLength(2);
+    expect(foundOrder.items[0].productId).toEqual(product1.id);
+    expect(foundOrder.items[0].price).toEqual(product1.salesPrice);
+    expect(foundOrder.items[0].quantity).toEqual(orderItem1.quantity);
+    expect(foundOrder.items[1].productId).toEqual(product2.id);
+    expect(foundOrder.items[1].price).toEqual(product2.salesPrice);
+    expect(foundOrder.items[1].quantity).toEqual(orderItem2.quantity);
   });
 });
