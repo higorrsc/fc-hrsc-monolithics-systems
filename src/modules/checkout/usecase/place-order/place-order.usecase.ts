@@ -6,6 +6,7 @@ import PaymentFacadeInterface from "../../../payment/facade/payment.facade.inter
 import ProductAdmFacadeInterface from "../../../product-adm/facade/product-adm.facade.interface";
 import StoreCatalogFacadeInterface from "../../../store-catalog/facade/store-catalog.facade.interface";
 import Client from "../../domain/client.entity";
+import OrderItem from "../../domain/order-item.entity";
 import Order from "../../domain/order.entity";
 import Product from "../../domain/product.entity";
 import CheckoutGateway from "../../gateway/checkout.gateway";
@@ -47,6 +48,16 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
     const products = await Promise.all(
       input.products.map((p) => this.getProduct(p.productId))
     );
+    // criar os itens da ordem
+    console.log("products - place-order-usecase", products);
+    const orderItems = products.map((p, index) => {
+      return new OrderItem({
+        productId: p.id.id,
+        price: p.salesPrice,
+        quantity: input.products[index].quantity,
+      });
+    });
+    console.log("orderItems - place-order-usecase", orderItems);
     // criar o objeto do client
     const myClient = new Client({
       id: new Id(client.id),
@@ -63,13 +74,14 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
     // criar o objeto da order(client, products)
     const order = new Order({
       client: myClient,
-      products,
+      items: orderItems,
     });
     // processar o pagamento -> paymentFacade.process(orderId, amount)
+    console.log("order - place-order-usecase", order);
     const payment = await this._paymentFacade.process({
       orderId: order.id.id,
       amount: order.total,
-    }); 
+    });
     // pagamento aprovado -> gerar invoice
     const invoice =
       payment.status === "approved"
@@ -101,7 +113,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
       status: order.status,
       total: order.total,
       products: input.products.map((p) => {
-        return { 
+        return {
           productId: p.productId,
           quantity: p.quantity,
         };
@@ -131,11 +143,11 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
     if (!product) {
       throw new Error("Product not found");
     }
+    console.log(product);
     const productProps = {
       id: new Id(product.id),
       name: product.name,
       description: product.description,
-      quantity: product.quantity,
       salesPrice: product.salesPrice,
     };
     return new Product(productProps);
