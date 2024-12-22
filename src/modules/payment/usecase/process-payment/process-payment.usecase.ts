@@ -7,7 +7,11 @@ import {
 } from "./process-payment.dto";
 
 export default class ProcessPaymentUseCase implements UseCaseInterface {
-  constructor(private transactionRepository: PaymentGateway) {}
+  private _transactionRepository: PaymentGateway;
+
+  constructor(transactionRepository: PaymentGateway) {
+    this._transactionRepository = transactionRepository;
+  }
 
   async execute(
     input: ProcessPaymentInputDto
@@ -19,7 +23,7 @@ export default class ProcessPaymentUseCase implements UseCaseInterface {
       });
       transaction.process();
 
-      const persistTransaction = await this.transactionRepository.save(
+      const persistTransaction = await this._transactionRepository.save(
         transaction
       );
 

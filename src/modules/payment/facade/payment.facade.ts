@@ -6,11 +6,15 @@ import {
 import PaymentFacadeInterface from "./payment.facade.interface";
 
 export default class PaymentFacade implements PaymentFacadeInterface {
-  constructor(private processPaymentUseCase: UseCaseInterface) {}
+  private _processPaymentUseCase: UseCaseInterface;
+
+  constructor(processPaymentUseCase: UseCaseInterface) {
+    this._processPaymentUseCase = processPaymentUseCase;
+  }
 
   async process(input: PaymentFacadeInputDto): Promise<PaymentFacadeOutputDto> {
     try {
-      const output = await this.processPaymentUseCase.execute(input);
+      const output = await this._processPaymentUseCase.execute(input);
       return {
         transactionId: output.transactionId,
         orderId: output.orderId,
