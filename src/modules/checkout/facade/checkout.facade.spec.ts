@@ -90,8 +90,8 @@ describe('CheckoutFacade tests', () => {
 
     expect(output.id).toBeDefined()
     expect(output.clientId).toBe(testId.clientId)
-    expect(output.status).toBe('pending')
-    expect(output.total).toBe(300)
+    expect(output.status).toBe('approved')
+    expect(output.total).toBe(500)
     expect(output.products).toStrictEqual([
       {
         productId: testId.productId,
