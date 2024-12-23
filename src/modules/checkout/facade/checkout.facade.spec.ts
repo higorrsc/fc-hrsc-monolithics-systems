@@ -1,4 +1,4 @@
-import { CreateMigrator } from '../../../infrastructure/api/db.config'
+import { CreateMigrator } from '../../../infrastructure/db.config'
 import { Migrator } from '../../../infrastructure/migrations/config/migrator'
 import Id from '../../@shared/domain/value-object/id.value-object'
 import { AddClientFacadeInputDto } from '../../client-adm/facade/client-adm.facade.dto'

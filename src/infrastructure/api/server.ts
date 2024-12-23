@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import { migrator } from './db.config'
+import { migrator } from '../db.config'
 import { app } from './express'
 
 dotenv.config()

@@ -1,6 +1,6 @@
 import request from 'supertest'
+import { CreateMigrator } from '../../db.config'
 import { Migrator } from '../../migrations/config/migrator'
-import { CreateMigrator } from '../db.config'
 import { app } from '../express'
 
 describe('Client API E2E tests', () => {

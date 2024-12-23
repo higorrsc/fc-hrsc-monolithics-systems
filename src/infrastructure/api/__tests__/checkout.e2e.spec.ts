@@ -2,8 +2,8 @@ import request from 'supertest'
 import Id from '../../../modules/@shared/domain/value-object/id.value-object'
 import { ClientModel } from '../../../modules/client-adm/repository/client.model'
 import { ProductModel } from '../../../modules/product-adm/repository/product.model'
+import { CreateMigrator } from '../../db.config'
 import { Migrator } from '../../migrations/config/migrator'
-import { CreateMigrator } from '../db.config'
 import { app } from '../express'
 
 describe('Checkout API E2E tests', () => {
