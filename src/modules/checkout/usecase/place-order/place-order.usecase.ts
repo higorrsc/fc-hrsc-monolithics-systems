@@ -49,7 +49,6 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
       input.products.map((p) => this.getProduct(p.productId))
     )
     // criar os itens da ordem
-    // console.log("products - place-order-usecase", products);
     const orderItems = products.map((p, index) => {
       return new OrderItem({
         productId: p.id.id,
@@ -57,7 +56,6 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
         quantity: input.products[index].quantity,
       })
     })
-    console.log('orderItems - place-order-usecase', orderItems)
     // criar o objeto do client
     const myClient = new Client({
       id: new Id(client.id),
@@ -77,7 +75,6 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
       items: orderItems,
     })
     // processar o pagamento -> paymentFacade.process(orderId, amount)
-    console.log('order - place-order-usecase', order)
     const payment = await this._paymentFacade.process({
       orderId: order.id.id,
       amount: order.total,
@@ -110,6 +107,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
     return {
       id: order.id.id,
       invoiceId: payment.status === 'approved' ? invoice.id : null,
+      clientId: order.client.id.id,
       status: order.status,
       total: order.total,
       products: input.products.map((p) => {
@@ -143,7 +141,6 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
     if (!product) {
       throw new Error('Product not found')
     }
-    console.log(product)
     const productProps = {
       id: new Id(product.id),
       name: product.name,
