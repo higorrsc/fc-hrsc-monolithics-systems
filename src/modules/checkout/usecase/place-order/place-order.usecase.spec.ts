@@ -374,11 +374,13 @@ describe('PlaceOrderUseCase unit test', () => {
               id: products['1'].id.id,
               name: products['1'].name,
               price: products['1'].salesPrice,
+              quantity: input.products[0].quantity,
             },
             {
               id: products['2'].id.id,
               name: products['2'].name,
               price: products['2'].salesPrice,
+              quantity: input.products[1].quantity,
             },
           ],
         })

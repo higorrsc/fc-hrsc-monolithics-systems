@@ -91,11 +91,12 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
             city: client.city,
             state: client.state,
             zipCode: client.zipCode,
-            items: products.map((p) => {
+            items: products.map((p, index) => {
               return {
                 id: p.id.id,
                 name: p.name,
                 price: p.salesPrice,
+                quantity: input.products[index].quantity,
               }
             }),
           })
