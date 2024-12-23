@@ -20,4 +20,7 @@ export class InvoiceItemModel extends Model {
 
   @Column({ allowNull: false })
   quantity: number
+
+  @Column({ allowNull: false })
+  total: number
 }

@@ -22,6 +22,9 @@ export class OrderItemModel extends Model {
   price: number
 
   @Column({ allowNull: false })
+  total: number
+
+  @Column({ allowNull: false })
   createdAt: Date
 
   @Column({ allowNull: false })

@@ -126,6 +126,7 @@ describe('OrderRepository test', () => {
       id: 'order-1',
       clientId: 'client-1',
       status: 'open',
+      total: 5,
       createdAt: new Date(),
       updatedAt: new Date(),
     })
@@ -135,6 +136,7 @@ describe('OrderRepository test', () => {
       productId: 'prod-1',
       quantity: 1,
       price: 1,
+      total: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
     })
@@ -144,6 +146,7 @@ describe('OrderRepository test', () => {
       productId: 'prod-2',
       quantity: 2,
       price: 2,
+      total: 4,
       createdAt: new Date(),
       updatedAt: new Date(),
     })

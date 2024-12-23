@@ -10,25 +10,36 @@ import { OrderModel } from './order.model'
 
 export class OrderRepository implements CheckoutGateway {
   async add(order: Order): Promise<void> {
-    await OrderModel.create({
-      id: order.id.id,
-      clientId: order.client.id.id,
-      status: order.status,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    })
+    try {
+      const totalItems = order.items.reduce(
+        (acc, item) => acc + item.price * item.quantity,
+        0
+      )
 
-    order.items.map(async (item) => {
-      await OrderItemModel.create({
-        id: new Id().id,
-        orderId: order.id.id,
-        productId: item.id.id,
-        price: item.price,
-        quantity: item.quantity,
+      await OrderModel.create({
+        id: order.id.id,
+        clientId: order.client.id.id,
+        status: order.status,
         createdAt: new Date(),
         updatedAt: new Date(),
+        total: totalItems,
       })
-    })
+
+      order.items.map(async (item) => {
+        await OrderItemModel.create({
+          id: new Id().id,
+          orderId: order.id.id,
+          productId: item.id.id,
+          quantity: item.quantity,
+          price: item.price,
+          total: item.quantity * item.price,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        })
+      })
+    } catch (error) {
+      console.log('Erro ao adicionar dados da ordem:', error)
+    }
   }
   async find(id: string): Promise<Order | null> {
     const order = await OrderModel.findOne({ where: { id } })

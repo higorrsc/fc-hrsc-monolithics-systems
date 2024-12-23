@@ -16,6 +16,9 @@ export class OrderModel extends Model {
   status: string
 
   @Column({ allowNull: false })
+  total: number
+
+  @Column({ allowNull: false })
   createdAt: Date
 
   @Column({ allowNull: false })
