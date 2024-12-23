@@ -23,8 +23,8 @@ export class OrderRepository implements CheckoutGateway {
         id: new Id().id,
         orderId: order.id.id,
         productId: item.id.id,
-        quantity: item.quantity,
         price: item.price,
+        quantity: item.quantity,
         createdAt: new Date(),
         updatedAt: new Date(),
       })
