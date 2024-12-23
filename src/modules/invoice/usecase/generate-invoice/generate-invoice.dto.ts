@@ -12,6 +12,7 @@ export interface GenerateInvoiceInputDto {
     id: string
     name: string
     price: number
+    quantity: number
   }[]
 }
 
@@ -29,6 +30,7 @@ export interface GenerateInvoiceOutputDto {
     id: string
     name: string
     price: number
+    quantity: number
   }[]
   total: number
 }

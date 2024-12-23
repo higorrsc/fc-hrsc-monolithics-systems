@@ -42,6 +42,7 @@ export default class InvoiceRepository implements InvoiceGateway {
           invoiceId: new Id(item.invoiceId),
           name: item.name,
           price: item.price,
+          quantity: item.quantity,
         })
       }),
       createdAt: invoice.createdAt,
@@ -52,7 +53,7 @@ export default class InvoiceRepository implements InvoiceGateway {
     if (input.items.length === 0) {
       throw new Error('Items are required')
     }
-
+    console.log(input)
     await InvoiceModel.create({
       id: input.id.id,
       name: input.name,
@@ -73,6 +74,7 @@ export default class InvoiceRepository implements InvoiceGateway {
         invoiceId: input.id.id,
         name: item.name,
         price: item.price,
+        quantity: item.quantity,
       })
     }
 

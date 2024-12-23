@@ -37,6 +37,7 @@ export default class GenerateInvoiceUseCase {
           invoiceId: invoiceId,
           name: i.name,
           price: i.price,
+          quantity: i.quantity,
         })
       }),
     }
@@ -57,6 +58,7 @@ export default class GenerateInvoiceUseCase {
           id: i.id.id,
           name: i.name,
           price: i.price,
+          quantity: i.quantity,
         }
       }),
       total: invoice.items.reduce((total, item) => total + item.price, 0),

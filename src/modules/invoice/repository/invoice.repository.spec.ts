@@ -39,6 +39,7 @@ describe('ProductRepository test', () => {
       invoiceId: new Id('1'),
       name: 'Item 1',
       price: 10,
+      quantity: 1,
     })
     const invoice = new Invoice({
       id: new Id('1'),
@@ -71,6 +72,7 @@ describe('ProductRepository test', () => {
       invoiceId: new Id('1'),
       name: 'Item 1',
       price: 10,
+      quantity: 1,
     })
     const invoice = new Invoice({
       id: new Id('1'),
