@@ -1,29 +1,29 @@
-import { Column, Model, PrimaryKey, Table } from "sequelize-typescript";
+import { Column, Model, PrimaryKey, Table } from 'sequelize-typescript'
 
 @Table({
-  tableName: "order_items",
+  tableName: 'order_items',
   timestamps: false,
 })
 export class OrderItemModel extends Model {
   @PrimaryKey
   @Column({ allowNull: false })
-  id: string;
+  id: string
 
   @Column({ allowNull: false })
-  orderId: string;
+  orderId: string
 
   @Column({ allowNull: false })
-  productId: string;
+  productId: string
 
   @Column({ allowNull: false })
-  quantity: number;
+  quantity: number
 
   @Column({ allowNull: false })
-  price: number;
+  price: number
 
   @Column({ allowNull: false })
-  createdAt: Date;
+  createdAt: Date
 
   @Column({ allowNull: false })
-  updatedAt: Date;
+  updatedAt: Date
 }

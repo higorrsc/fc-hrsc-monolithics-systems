@@ -1,28 +1,28 @@
-import { DataType, Sequelize } from "sequelize-typescript";
-import { MigrationFn } from "umzug";
+import { DataType, Sequelize } from 'sequelize-typescript'
+import { MigrationFn } from 'umzug'
 
 export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
-  await createTableClients(sequelize);
-  await createTableProducts(sequelize);
-  await createTableInvoices(sequelize);
-  await createTableInvoiceItems(sequelize);
-  await createTableTransactions(sequelize);
-  await createTableOrders(sequelize);
-  await createTableOrderItems(sequelize);
-};
+  await createTableClients(sequelize)
+  await createTableProducts(sequelize)
+  await createTableInvoices(sequelize)
+  await createTableInvoiceItems(sequelize)
+  await createTableTransactions(sequelize)
+  await createTableOrders(sequelize)
+  await createTableOrderItems(sequelize)
+}
 
 export const down: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
-  await sequelize.getQueryInterface().dropTable("order_items");
-  await sequelize.getQueryInterface().dropTable("orders");
-  await sequelize.getQueryInterface().dropTable("transactions");
-  await sequelize.getQueryInterface().dropTable("invoice_items");
-  await sequelize.getQueryInterface().dropTable("invoices");
-  await sequelize.getQueryInterface().dropTable("products");
-  await sequelize.getQueryInterface().dropTable("clients");
-};
+  await sequelize.getQueryInterface().dropTable('order_items')
+  await sequelize.getQueryInterface().dropTable('orders')
+  await sequelize.getQueryInterface().dropTable('transactions')
+  await sequelize.getQueryInterface().dropTable('invoice_items')
+  await sequelize.getQueryInterface().dropTable('invoices')
+  await sequelize.getQueryInterface().dropTable('products')
+  await sequelize.getQueryInterface().dropTable('clients')
+}
 
 async function createTableClients(sequelize: Sequelize) {
-  await sequelize.getQueryInterface().createTable("clients", {
+  await sequelize.getQueryInterface().createTable('clients', {
     id: {
       type: DataType.STRING(255),
       primaryKey: true,
@@ -72,11 +72,11 @@ async function createTableClients(sequelize: Sequelize) {
       type: DataType.DATE,
       allowNull: false,
     },
-  });
+  })
 }
 
 async function createTableProducts(sequelize: Sequelize) {
-  await sequelize.getQueryInterface().createTable("products", {
+  await sequelize.getQueryInterface().createTable('products', {
     id: {
       type: DataType.STRING(255),
       primaryKey: true,
@@ -110,11 +110,11 @@ async function createTableProducts(sequelize: Sequelize) {
       type: DataType.DATE,
       allowNull: false,
     },
-  });
+  })
 }
 
 async function createTableInvoices(sequelize: Sequelize) {
-  await sequelize.getQueryInterface().createTable("invoices", {
+  await sequelize.getQueryInterface().createTable('invoices', {
     id: {
       type: DataType.STRING(255),
       primaryKey: true,
@@ -164,11 +164,11 @@ async function createTableInvoices(sequelize: Sequelize) {
       type: DataType.DATE,
       allowNull: false,
     },
-  });
+  })
 }
 
 async function createTableInvoiceItems(sequelize: Sequelize) {
-  await sequelize.getQueryInterface().createTable("invoice_items", {
+  await sequelize.getQueryInterface().createTable('invoice_items', {
     id: {
       type: DataType.STRING(255),
       primaryKey: true,
@@ -202,11 +202,11 @@ async function createTableInvoiceItems(sequelize: Sequelize) {
       type: DataType.DATE,
       allowNull: false,
     },
-  });
+  })
 }
 
 async function createTableTransactions(sequelize: Sequelize) {
-  await sequelize.getQueryInterface().createTable("transactions", {
+  await sequelize.getQueryInterface().createTable('transactions', {
     id: {
       type: DataType.STRING(255),
       primaryKey: true,
@@ -232,11 +232,11 @@ async function createTableTransactions(sequelize: Sequelize) {
       type: DataType.DATE,
       allowNull: false,
     },
-  });
+  })
 }
 
 async function createTableOrders(sequelize: Sequelize) {
-  await sequelize.getQueryInterface().createTable("orders", {
+  await sequelize.getQueryInterface().createTable('orders', {
     id: {
       type: DataType.STRING(255),
       primaryKey: true,
@@ -262,11 +262,11 @@ async function createTableOrders(sequelize: Sequelize) {
       type: DataType.DATE,
       allowNull: false,
     },
-  });
+  })
 }
 
 async function createTableOrderItems(sequelize: Sequelize) {
-  await sequelize.getQueryInterface().createTable("order_items", {
+  await sequelize.getQueryInterface().createTable('order_items', {
     id: {
       type: DataType.STRING(255),
       primaryKey: true,
@@ -300,5 +300,5 @@ async function createTableOrderItems(sequelize: Sequelize) {
       type: DataType.DATE,
       allowNull: false,
     },
-  });
+  })
 }

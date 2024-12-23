@@ -1,24 +1,24 @@
-import Id from "../../../@shared/domain/value-object/id.value-object";
-import Address from "../../domain/address.value-object";
-import InvoiceItem from "../../domain/invoice-item.entity";
-import Invoice from "../../domain/invoice.entity";
-import InvoiceGateway from "../../gateway/invoice.gateway";
+import Id from '../../../@shared/domain/value-object/id.value-object'
+import Address from '../../domain/address.value-object'
+import InvoiceItem from '../../domain/invoice-item.entity'
+import Invoice from '../../domain/invoice.entity'
+import InvoiceGateway from '../../gateway/invoice.gateway'
 import {
   GenerateInvoiceInputDto,
   GenerateInvoiceOutputDto,
-} from "./generate-invoice.dto";
+} from './generate-invoice.dto'
 
 export default class GenerateInvoiceUseCase {
-  private _invoiceRepository: InvoiceGateway;
+  private _invoiceRepository: InvoiceGateway
 
   constructor(invoiceRepository: InvoiceGateway) {
-    this._invoiceRepository = invoiceRepository;
+    this._invoiceRepository = invoiceRepository
   }
 
   async execute(
     input: GenerateInvoiceInputDto
   ): Promise<GenerateInvoiceOutputDto> {
-    const invoiceId = new Id(input.id) || new Id();
+    const invoiceId = new Id(input.id) || new Id()
     const props = {
       id: invoiceId,
       name: input.name,
@@ -37,11 +37,11 @@ export default class GenerateInvoiceUseCase {
           invoiceId: invoiceId,
           name: i.name,
           price: i.price,
-        });
+        })
       }),
-    };
-    const invoice = new Invoice(props);
-    this._invoiceRepository.generate(invoice);
+    }
+    const invoice = new Invoice(props)
+    this._invoiceRepository.generate(invoice)
     return {
       id: invoice.id.id,
       name: invoice.name,
@@ -57,9 +57,9 @@ export default class GenerateInvoiceUseCase {
           id: i.id.id,
           name: i.name,
           price: i.price,
-        };
+        }
       }),
       total: invoice.items.reduce((total, item) => total + item.price, 0),
-    };
+    }
   }
 }

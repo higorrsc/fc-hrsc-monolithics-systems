@@ -1,10 +1,10 @@
-import Id from "../../@shared/domain/value-object/id.value-object";
-import Address from "../domain/address.value-object";
-import InvoiceItem from "../domain/invoice-item.entity";
-import Invoice from "../domain/invoice.entity";
-import InvoiceGateway from "../gateway/invoice.gateway";
-import { InvoiceItemModel } from "./invoice-item.model";
-import { InvoiceModel } from "./invoice.model";
+import Id from '../../@shared/domain/value-object/id.value-object'
+import Address from '../domain/address.value-object'
+import InvoiceItem from '../domain/invoice-item.entity'
+import Invoice from '../domain/invoice.entity'
+import InvoiceGateway from '../gateway/invoice.gateway'
+import { InvoiceItemModel } from './invoice-item.model'
+import { InvoiceModel } from './invoice.model'
 
 export default class InvoiceRepository implements InvoiceGateway {
   async find(input: string): Promise<Invoice> {
@@ -12,17 +12,17 @@ export default class InvoiceRepository implements InvoiceGateway {
       where: {
         id: input,
       },
-    });
+    })
 
     if (!invoice) {
-      throw new Error("Invoice not found");
+      throw new Error('Invoice not found')
     }
 
     const items = await InvoiceItemModel.findAll({
       where: {
         invoiceId: invoice.id,
       },
-    });
+    })
 
     return new Invoice({
       id: new Id(invoice.id),
@@ -42,15 +42,15 @@ export default class InvoiceRepository implements InvoiceGateway {
           invoiceId: new Id(item.invoiceId),
           name: item.name,
           price: item.price,
-        });
+        })
       }),
       createdAt: invoice.createdAt,
       updatedAt: invoice.updatedAt,
-    });
+    })
   }
   async generate(input: Invoice): Promise<Invoice> {
     if (input.items.length === 0) {
-      throw new Error("Items are required");
+      throw new Error('Items are required')
     }
 
     await InvoiceModel.create({
@@ -65,7 +65,7 @@ export default class InvoiceRepository implements InvoiceGateway {
       zipCode: input.address.zipCode,
       createdAt: input.createdAt,
       updatedAt: input.updatedAt,
-    });
+    })
 
     for (const item of input.items) {
       InvoiceItemModel.create({
@@ -73,7 +73,7 @@ export default class InvoiceRepository implements InvoiceGateway {
         invoiceId: input.id.id,
         name: item.name,
         price: item.price,
-      });
+      })
     }
 
     return new Invoice({
@@ -82,6 +82,6 @@ export default class InvoiceRepository implements InvoiceGateway {
       document: input.document,
       address: input.address,
       items: input.items,
-    });
+    })
   }
 }

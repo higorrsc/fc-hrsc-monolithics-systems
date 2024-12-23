@@ -2,11 +2,11 @@ import {
   FindInvoiceFacadeInputDto,
   FindInvoiceFacadeOutputDto,
   GenerateInvoiceFacadeInputDto,
-} from "./invoice.facade.dto";
+} from './invoice.facade.dto'
 
 export default interface InvoiceFacadeInterface {
   generate(
     input: GenerateInvoiceFacadeInputDto
-  ): Promise<FindInvoiceFacadeOutputDto>;
-  find(input: FindInvoiceFacadeInputDto): Promise<FindInvoiceFacadeOutputDto>;
+  ): Promise<FindInvoiceFacadeOutputDto>
+  find(input: FindInvoiceFacadeInputDto): Promise<FindInvoiceFacadeOutputDto>
 }
