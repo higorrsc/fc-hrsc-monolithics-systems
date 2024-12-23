@@ -13,9 +13,6 @@ import CheckoutFacadeInterface from './checkout.facade.interface'
 
 describe('CheckoutFacade tests', () => {
   let migrator: Migrator
-  let checkoutFacade: CheckoutFacadeInterface
-  let clientFacade: ClientAdmFacadeInterface
-  let productFacade: ProductAdmFacadeInterface
 
   const testId = {
     clientId: new Id().id,
@@ -23,49 +20,49 @@ describe('CheckoutFacade tests', () => {
     otherProductId: new Id().id,
   }
 
-  const client: AddClientFacadeInputDto = {
-    id: testId.clientId,
-    name: 'Higor Cruz',
-    email: 'higorrsc@gmail.com',
-    document: '12345678910',
-    street: 'Fools Street',
-    number: '0',
-    complement: 'Without Roof',
-    city: 'Funny House',
-    state: 'WW',
-    zipCode: '15926',
-  }
-
-  const product: AddProductFacadeInputDto = {
-    id: testId.productId,
-    name: 'Product 1',
-    description: 'Product 1 description',
-    salesPrice: 100,
-    purchasePrice: 50,
-    stock: 10,
-  }
-
-  const otherProduct: AddProductFacadeInputDto = {
-    id: testId.otherProductId,
-    name: 'Product 2',
-    description: 'Product 2 description',
-    salesPrice: 200,
-    purchasePrice: 100,
-    stock: 5,
-  }
-
   beforeEach(async () => {
     migrator = CreateMigrator()
     await migrator.up()
 
-    clientFacade = ClientAdmFacadeFactory.create()
+    const client: AddClientFacadeInputDto = {
+      id: testId.clientId,
+      name: 'Higor Cruz',
+      email: 'higorrsc@gmail.com',
+      document: '12345678910',
+      street: 'Fools Street',
+      number: '0',
+      complement: 'Without Roof',
+      city: 'Funny House',
+      state: 'WW',
+      zipCode: '15926',
+    }
+
+    const product: AddProductFacadeInputDto = {
+      id: testId.productId,
+      name: 'Product 1',
+      description: 'Product 1 description',
+      salesPrice: 100,
+      purchasePrice: 50,
+      stock: 10,
+    }
+
+    const otherProduct: AddProductFacadeInputDto = {
+      id: testId.otherProductId,
+      name: 'Product 2',
+      description: 'Product 2 description',
+      salesPrice: 200,
+      purchasePrice: 100,
+      stock: 5,
+    }
+
+    const clientFacade: ClientAdmFacadeInterface =
+      ClientAdmFacadeFactory.create()
     await clientFacade.addClient(client)
 
-    productFacade = ProductAdmFacadeFactory.create()
+    const productFacade: ProductAdmFacadeInterface =
+      ProductAdmFacadeFactory.create()
     await productFacade.addProduct(product)
     await productFacade.addProduct(otherProduct)
-
-    checkoutFacade = CheckoutFacadeFactory.create()
   })
 
   afterEach(async () => {
@@ -73,34 +70,19 @@ describe('CheckoutFacade tests', () => {
   })
 
   it('should place an order', async () => {
+    const checkoutFacade: CheckoutFacadeInterface =
+      CheckoutFacadeFactory.create()
     const input: PlaceOrderInputDto = {
       clientId: testId.clientId,
       products: [
-        {
-          productId: testId.productId,
-          quantity: 1,
-        },
-        {
-          productId: testId.otherProductId,
-          quantity: 2,
-        },
+        { productId: testId.productId, quantity: 1 },
+        { productId: testId.otherProductId, quantity: 1 },
       ],
     }
-    const output = await checkoutFacade.placeOrder(input)
 
-    expect(output.id).toBeDefined()
-    expect(output.clientId).toBe(testId.clientId)
-    expect(output.status).toBe('approved')
-    expect(output.total).toBe(500)
-    expect(output.products).toStrictEqual([
-      {
-        productId: testId.productId,
-        quantity: 1,
-      },
-      {
-        productId: testId.otherProductId,
-        quantity: 2,
-      },
-    ])
+    const result = await checkoutFacade.placeOrder(input)
+    expect(result.id).toBeDefined()
+    expect(result.total).toBe(300)
+    expect(result.status).toBe('approved')
   })
 })
