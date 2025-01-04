@@ -9,15 +9,15 @@ import PlaceOrderUseCase from '../usecase/place-order/place-order.usecase'
 
 export default class CheckoutFacadeFactory {
   static create() {
+    const orderRepository = new OrderRepository()
     const useCase = new PlaceOrderUseCase(
       ClientAdmFacadeFactory.create(),
       ProductAdmFacadeFactory.create(),
       StoreCatalogFacadeFactory.create(),
-      new OrderRepository(),
+      orderRepository,
       InvoiceFacadeFactory.create(),
       PaymentFacadeFactory.create()
     )
-    const checkoutFacade = new CheckoutFacade({ placeOrderUseCase: useCase })
-    return checkoutFacade
+    return new CheckoutFacade({ placeOrderUseCase: useCase })
   }
 }
