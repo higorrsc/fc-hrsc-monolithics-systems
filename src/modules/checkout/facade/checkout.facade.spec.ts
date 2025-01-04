@@ -8,7 +8,10 @@ import { AddProductFacadeInputDto } from '../../product-adm/facade/product-adm.f
 import ProductAdmFacadeInterface from '../../product-adm/facade/product-adm.facade.interface'
 import ProductAdmFacadeFactory from '../../product-adm/factory/product-adm.facade.factory'
 import CheckoutFacadeFactory from '../factory/checkout.facade.factory'
-import { PlaceOrderInputDto } from '../usecase/place-order/place-order.dto'
+import {
+  PlaceOrderInputDto,
+  PlaceOrderOutputDto,
+} from '../usecase/place-order/place-order.dto'
 import CheckoutFacadeInterface from './checkout.facade.interface'
 
 describe('CheckoutFacade tests', () => {
@@ -80,7 +83,7 @@ describe('CheckoutFacade tests', () => {
       ],
     }
 
-    const result = await checkoutFacade.placeOrder(input)
+    const result: PlaceOrderOutputDto = await checkoutFacade.placeOrder(input)
     expect(result.id).toBeDefined()
     expect(result.total).toBe(300)
     expect(result.status).toBe('approved')

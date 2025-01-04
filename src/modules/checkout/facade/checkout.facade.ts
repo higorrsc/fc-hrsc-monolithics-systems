@@ -1,4 +1,5 @@
 import UseCaseInterface from '../../@shared/usecase/use-case.interface'
+import { PlaceOrderOutputDto } from '../usecase/place-order/place-order.dto'
 import {
   CheckoutFacadeInputDto,
   CheckoutFacadeOutputDto,
@@ -18,14 +19,20 @@ export default class CheckoutFacade implements CheckoutFacadeInterface {
   async placeOrder(
     input: CheckoutFacadeInputDto
   ): Promise<CheckoutFacadeOutputDto> {
-    const response = await this._placeOrderUseCase.execute(input)
-    return {
-      id: response.id,
-      invoiceId: response.invoiceId,
-      clientId: response.clientId,
-      status: response.status,
-      total: response.total,
-      products: response.products,
+    try {
+      const response: PlaceOrderOutputDto =
+        await this._placeOrderUseCase.execute(input)
+
+      return {
+        id: response.id,
+        invoiceId: response.invoiceId,
+        clientId: response.clientId,
+        status: response.status,
+        total: response.total,
+        products: response.products,
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 }
