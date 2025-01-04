@@ -11,18 +11,13 @@ import { OrderModel } from './order.model'
 export class OrderRepository implements CheckoutGateway {
   async add(order: Order): Promise<void> {
     try {
-      const totalItems = order.items.reduce(
-        (acc, item) => acc + item.price * item.quantity,
-        0
-      )
-
       await OrderModel.create({
         id: order.id.id,
         clientId: order.client.id.id,
         status: order.status,
         createdAt: new Date(),
         updatedAt: new Date(),
-        total: totalItems,
+        total: order.total,
       })
 
       order.items.map(async (item) => {
