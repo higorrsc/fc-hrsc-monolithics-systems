@@ -60,7 +60,7 @@ describe('InvoiceFacade test', () => {
     await facade.generate(input)
     const result = await InvoiceModel.findOne({
       where: { id: input.id },
-    })
+    }).then((invoice) => invoice.toJSON())
     expect(result.id).toBeDefined()
     expect(result.name).toEqual(input.name)
     expect(result.document).toEqual(input.document)

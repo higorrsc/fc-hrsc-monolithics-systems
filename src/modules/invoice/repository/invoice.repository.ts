@@ -12,7 +12,7 @@ export default class InvoiceRepository implements InvoiceGateway {
       where: {
         id: input,
       },
-    })
+    }).then((invoice) => invoice.toJSON())
 
     if (!invoice) {
       throw new Error('Invoice not found')
@@ -22,7 +22,7 @@ export default class InvoiceRepository implements InvoiceGateway {
       where: {
         invoiceId: invoice.id,
       },
-    })
+    }).then((items) => items.map((item) => item.toJSON()))
 
     return new Invoice({
       id: new Id(invoice.id),
