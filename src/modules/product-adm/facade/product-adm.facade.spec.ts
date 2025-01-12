@@ -31,7 +31,9 @@ describe('ProductAdmFacade test', () => {
       stock: 10,
     }
     await productFacade.addProduct(input)
-    const product = await ProductModel.findOne({ where: { id: input.id } })
+    const product = await ProductModel.findOne({
+      where: { id: input.id },
+    }).then((product) => product.toJSON())
     expect(product).toBeDefined()
     expect(product.id).toBe(input.id)
     expect(product.name).toBe(input.name)
