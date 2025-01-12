@@ -47,7 +47,9 @@ describe('ClientRepository test', () => {
     }
     await facade.addClient(input)
 
-    const clientDb = await ClientModel.findOne({ where: { id: input.id } })
+    const clientDb = await ClientModel.findOne({
+      where: { id: input.id },
+    }).then((client) => client.toJSON())
     expect(clientDb).toBeDefined()
     expect(clientDb.name).toEqual(input.name)
     expect(clientDb.email).toEqual(input.email)

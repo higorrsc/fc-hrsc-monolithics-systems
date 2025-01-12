@@ -38,7 +38,9 @@ describe('ClientRepository test', () => {
     })
     const repository = new ClientRepository()
     await repository.add(client)
-    const clientDb = await ClientModel.findOne({ where: { id: client.id.id } })
+    const clientDb = await ClientModel.findOne({
+      where: { id: client.id.id },
+    }).then((client) => client.toJSON())
     expect(clientDb).toBeDefined()
     expect(clientDb.id).toEqual(client.id.id)
     expect(clientDb.name).toEqual(client.name)
@@ -68,7 +70,7 @@ describe('ClientRepository test', () => {
       zipCode: '31659-564',
       createdAt: new Date(),
       updatedAt: new Date(),
-    })
+    }).then((client) => client.toJSON())
     const repository = new ClientRepository()
     const result = await repository.find(client.id)
     expect(client.id).toEqual(result.id.id)
