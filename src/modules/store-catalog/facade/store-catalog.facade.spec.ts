@@ -28,7 +28,9 @@ describe('StoreCatalogFacade test', () => {
       name: 'Product 1',
       description: 'Product 1 description',
       salesPrice: 100,
-    })
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }).then((product) => product.toJSON())
     const result = await facade.find({ id: product.id })
     expect(result.id).toBe(product.id)
     expect(result.name).toBe(product.name)
@@ -43,13 +45,17 @@ describe('StoreCatalogFacade test', () => {
       name: 'Product 1',
       description: 'Product 1 description',
       salesPrice: 100,
-    })
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }).then((product) => product.toJSON())
     const product2 = await ProductModel.create({
       id: '2',
       name: 'Product 2',
       description: 'Product 2 description',
       salesPrice: 200,
-    })
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }).then((product) => product.toJSON())
     const result = await facade.findAll()
     expect(result.products.length).toBe(2)
     expect(result.products[0].id).toBe(product.id)

@@ -28,14 +28,18 @@ describe('ProductRepository test', () => {
       description: 'Product 1 description',
       quantity: 1,
       salesPrice: 100,
-    })
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }).then((product) => product.toJSON())
     const product2 = await ProductModel.create({
       id: '2',
       name: 'Product 2',
       description: 'Product 2 description',
       quantity: 1,
       salesPrice: 200,
-    })
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }).then((product) => product.toJSON())
     const productRepository = new ProductRepository()
     const products = await productRepository.findAll()
     expect(products.length).toBe(2)
@@ -56,7 +60,9 @@ describe('ProductRepository test', () => {
       description: 'Product 1 description',
       quantity: 1,
       salesPrice: 100,
-    })
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }).then((product) => product.toJSON())
     const productRepository = new ProductRepository()
     const result = await productRepository.find(product.id)
     expect(result.id.id).toBe(product.id)
