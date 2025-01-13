@@ -176,6 +176,7 @@ async function createTableInvoiceItems(sequelize: Sequelize) {
     },
     invoiceId: {
       type: DataType.STRING(255),
+      primaryKey: true,
       allowNull: false,
     },
     name: {

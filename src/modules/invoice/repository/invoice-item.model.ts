@@ -9,6 +9,7 @@ export class InvoiceItemModel extends Model {
   @Column({ allowNull: false })
   id: string
 
+  @PrimaryKey
   @Column({ allowNull: false })
   invoiceId: string
 
