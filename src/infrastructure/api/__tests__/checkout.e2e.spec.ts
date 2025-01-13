@@ -45,7 +45,6 @@ describe('Checkout API E2E tests', () => {
       id: testId.productId,
       name: 'Product 1',
       description: 'Product 1 description',
-      quantity: 5,
       salesPrice: 100,
       purchasePrice: 50,
       stock: 10,
@@ -57,7 +56,6 @@ describe('Checkout API E2E tests', () => {
       id: testId.otherProductId,
       name: 'Product 2',
       description: 'Product 2 description',
-      quantity: 2,
       salesPrice: 200,
       purchasePrice: 100,
       stock: 10,
@@ -76,8 +74,8 @@ describe('Checkout API E2E tests', () => {
       .send({
         clientId: testId.clientId,
         products: [
-          { productId: testId.productId },
-          { productId: testId.otherProductId },
+          { productId: testId.productId, quantity: 1 },
+          { productId: testId.otherProductId, quantity: 1 },
         ],
       })
 
