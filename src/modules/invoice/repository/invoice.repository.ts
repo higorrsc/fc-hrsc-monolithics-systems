@@ -73,16 +73,18 @@ export default class InvoiceRepository implements InvoiceGateway {
         updatedAt: input.updatedAt,
       })
 
-      for (const item of input.items) {
-        InvoiceItemModel.create({
-          id: item.id.id,
-          invoiceId: input.id.id,
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-          total: item.price * item.quantity,
+      await Promise.all(
+        input.items.map(async (item) => {
+          await InvoiceItemModel.create({
+            id: item.id.id,
+            invoiceId: input.id.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            total: item.price * item.quantity,
+          })
         })
-      }
+      )
     } catch (error) {
       console.log('Erro ao adicionar dados da ordem:', error)
     }
