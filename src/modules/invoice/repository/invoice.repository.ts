@@ -8,15 +8,17 @@ import { InvoiceModel } from './invoice.model'
 
 export default class InvoiceRepository implements InvoiceGateway {
   async find(input: string): Promise<Invoice> {
-    const invoice = await InvoiceModel.findOne({
+    let invoice = await InvoiceModel.findOne({
       where: {
         id: input,
       },
-    }).then((invoice) => invoice.toJSON())
+    })
 
     if (!invoice) {
       throw new Error('Invoice not found')
     }
+
+    invoice = invoice.toJSON()
 
     const items = await InvoiceItemModel.findAll({
       where: {
@@ -82,6 +84,8 @@ export default class InvoiceRepository implements InvoiceGateway {
             price: item.price,
             quantity: item.quantity,
             total: item.price * item.quantity,
+            createdAt: input.createdAt,
+            updatedAt: input.updatedAt,
           })
         })
       )
