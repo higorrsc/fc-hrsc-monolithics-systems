@@ -19,20 +19,17 @@ export default class CheckoutFacade implements CheckoutFacadeInterface {
   async placeOrder(
     input: CheckoutFacadeInputDto
   ): Promise<CheckoutFacadeOutputDto> {
-    try {
-      const response: PlaceOrderOutputDto =
-        await this._placeOrderUseCase.execute(input)
+    const response: PlaceOrderOutputDto = await this._placeOrderUseCase.execute(
+      input
+    )
 
-      return {
-        id: response.id,
-        invoiceId: response.invoiceId,
-        clientId: response.clientId,
-        status: response.status,
-        total: response.total,
-        products: response.products,
-      }
-    } catch (error) {
-      console.log(error)
+    return {
+      id: response.id,
+      invoiceId: response.invoiceId,
+      clientId: response.clientId,
+      status: response.status,
+      total: response.total,
+      products: response.products,
     }
   }
 }

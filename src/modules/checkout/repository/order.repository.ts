@@ -20,32 +20,40 @@ export class OrderRepository implements CheckoutGateway {
         total: order.total,
       })
 
-      order.items.map(async (item) => {
-        await OrderItemModel.create({
-          id: new Id().id,
-          orderId: order.id.id,
-          productId: item.id.id,
-          quantity: item.quantity,
-          price: item.price,
-          total: item.quantity * item.price,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+      await Promise.all(
+        order.items.map(async (item) => {
+          await OrderItemModel.create({
+            id: new Id().id,
+            orderId: order.id.id,
+            productId: item.id.id,
+            quantity: item.quantity,
+            price: item.price,
+            total: item.quantity * item.price,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          })
         })
-      })
+      )
     } catch (error) {
       console.log('Erro ao adicionar dados da ordem:', error)
     }
   }
   async find(id: string): Promise<Order | null> {
-    const order = await OrderModel.findOne({ where: { id } })
+    const order = await OrderModel.findOne({ where: { id } }).then((order) =>
+      order.toJSON()
+    )
     if (!order) {
-      throw new Error(`Product with id ${id} not found`)
+      throw new Error(`Order with id ${id} not found`)
     }
-    const client = await ClientModel.findOne({ where: { id: order.clientId } })
-    const orderItems = await OrderItemModel.findAll({ where: { orderId: id } })
+    const client = await ClientModel.findOne({
+      where: { id: order.clientId },
+    }).then((client) => client.toJSON())
+    const orderItems = await OrderItemModel.findAll({
+      where: { orderId: id },
+    }).then((orderItems) => orderItems.map((orderItem) => orderItem.toJSON()))
     const products = await ProductModel.findAll({
       where: { id: orderItems.map((item) => item.productId) },
-    })
+    }).then((products) => products.map((product) => product.toJSON()))
     const orderItemsData = orderItems.map((item) => {
       const product = products.find((p) => p.id === item.productId)
       if (!product) {

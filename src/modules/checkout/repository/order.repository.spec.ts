@@ -76,10 +76,10 @@ describe('OrderRepository test', () => {
 
     const orderDb = await OrderModel.findOne({
       where: { id: order.id.id },
-    })
+    }).then((order) => order.toJSON())
     const orderItemDb = await OrderItemModel.findOne({
       where: { orderId: order.id.id },
-    })
+    }).then((orderItem) => orderItem.toJSON())
     expect(orderDb).toBeDefined()
     expect(orderDb.id).toEqual(order.id.id)
     expect(orderDb.clientId).toEqual(order.client.id.id)
@@ -105,7 +105,7 @@ describe('OrderRepository test', () => {
       zipCode: '31659-564',
       createdAt: new Date(),
       updatedAt: new Date(),
-    })
+    }).then((client) => client.toJSON())
     const product1 = await ProductModel.create({
       id: 'prod-1',
       name: 'Product 1',
@@ -113,7 +113,7 @@ describe('OrderRepository test', () => {
       salesPrice: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
-    })
+    }).then((product) => product.toJSON())
     const product2 = await ProductModel.create({
       id: 'prod-2',
       name: 'Product 2',
@@ -121,7 +121,7 @@ describe('OrderRepository test', () => {
       salesPrice: 2,
       createdAt: new Date(),
       updatedAt: new Date(),
-    })
+    }).then((product) => product.toJSON())
     const order = await OrderModel.create({
       id: 'order-1',
       clientId: 'client-1',
@@ -129,7 +129,7 @@ describe('OrderRepository test', () => {
       total: 5,
       createdAt: new Date(),
       updatedAt: new Date(),
-    })
+    }).then((order) => order.toJSON())
     const orderItem1 = await OrderItemModel.create({
       id: 'order-item-1',
       orderId: 'order-1',
@@ -139,7 +139,7 @@ describe('OrderRepository test', () => {
       total: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
-    })
+    }).then((orderItem) => orderItem.toJSON())
     const orderItem2 = await OrderItemModel.create({
       id: 'order-item-2',
       orderId: 'order-1',
@@ -149,7 +149,7 @@ describe('OrderRepository test', () => {
       total: 4,
       createdAt: new Date(),
       updatedAt: new Date(),
-    })
+    }).then((orderItem) => orderItem.toJSON())
 
     const orderRepository = new OrderRepository()
     const foundOrder = await orderRepository.find('order-1')
