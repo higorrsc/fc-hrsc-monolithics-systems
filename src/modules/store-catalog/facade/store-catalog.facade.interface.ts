@@ -2,12 +2,12 @@ import {
   FindAllStoreCatalogFacadeOutputDto,
   FindStoreCatalogFacadeInputDto,
   FindStoreCatalogFacadeOutputDto,
-} from "./store-catalog.facade.dto";
+} from './store-catalog.facade.dto'
 
 export default interface StoreCatalogFacadeInterface {
   find(
     id: FindStoreCatalogFacadeInputDto
-  ): Promise<FindStoreCatalogFacadeOutputDto>;
+  ): Promise<FindStoreCatalogFacadeOutputDto>
 
-  findAll(): Promise<FindAllStoreCatalogFacadeOutputDto>;
+  findAll(): Promise<FindAllStoreCatalogFacadeOutputDto>
 }

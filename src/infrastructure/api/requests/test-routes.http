@@ -1,0 +1,93 @@
+# Create a client
+# @name createClient
+POST http://localhost:3000/clients
+Content-Type: application/json
+
+{
+  "name": "Higor Cruz",
+  "email": "higorrsc@gmail.com",
+  "document": "12345678910",
+  "street": "Fools Street",
+  "number": "0",
+  "complement": "Without Roof",
+  "city": "Funny House",
+  "state": "WW",
+  "zipCode": "15926"
+}
+
+###
+
+# Save the client id to use in the next requests
+@clientId = {{createClient.response.body.id}}
+
+###
+
+# Create a product
+# @name createProduct
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "Product 1",
+  "description": "Product 1 Description",
+  "purchasePrice": 100.00,
+  "salesPrice": 110.00,
+  "stock": 10
+}
+
+### 
+
+# Save the product id to use in the next requests
+@productId = {{createProduct.response.body.id}}
+
+###
+
+# Create another product
+# @name createAnotherProduct
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "Product 2",
+  "description": "Product 2 Description",
+  "purchasePrice": 200.00,
+  "salesPrice": 220.00,
+  "stock": 20
+}
+
+###
+
+# Save the product id to use in the next requests
+@anotherProductId = {{createAnotherProduct.response.body.id}}
+
+###
+
+# Create a checkout
+# @name createCheckout
+POST http://localhost:3000/checkout
+Content-Type: application/json
+
+{
+  "clientId": "{{clientId}}",
+  "products": [
+    {
+      "productId": "{{productId}}",
+      "quantity": 1
+    },
+    {
+      "productId": "{{anotherProductId}}",
+      "quantity": 2
+    }
+  ]
+}
+
+###
+
+# Save the invoice id to use in the next requests
+@invoiceId = {{createCheckout.response.body.invoiceId}}
+
+###
+
+# Get the invoice
+# @name getInvoice
+GET http://localhost:3000/invoice/{{invoiceId}}

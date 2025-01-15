@@ -1,41 +1,43 @@
 export interface GenerateInvoiceFacadeInputDto {
-  id?: string;
-  name: string;
-  document: string;
-  street: string;
-  number: string;
-  complement: string;
-  city: string;
-  state: string;
-  zipCode: string;
+  id?: string
+  name: string
+  document: string
+  street: string
+  number: string
+  complement: string
+  city: string
+  state: string
+  zipCode: string
   items: {
-    id: string;
-    name: string;
-    price: number;
-  }[];
+    id: string
+    name: string
+    price: number
+    quantity: number
+  }[]
 }
 
 export interface FindInvoiceFacadeInputDto {
-  id: string;
+  id: string
 }
 
 export interface FindInvoiceFacadeOutputDto {
-  id: string;
-  name: string;
-  document: string;
+  id: string
+  name: string
+  document: string
   address: {
-    street: string;
-    number: string;
-    complement: string;
-    city: string;
-    state: string;
-    zipCode: string;
-  };
+    street: string
+    number: string
+    complement: string
+    city: string
+    state: string
+    zipCode: string
+  }
   items: {
-    id: string;
-    name: string;
-    price: number;
-  }[];
-  total: number;
-  createdAt: Date;
+    id: string
+    name: string
+    price: number
+    quantity: number
+  }[]
+  total: number
+  createdAt: Date
 }
